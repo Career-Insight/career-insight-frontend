@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>React App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="text/javascript">
+      //<![CDATA[
+      var tlJsHost =
+        window.location.protocol == "https:"
+          ? "https://secure.trust-provider.com/"
+          : "http://www.trustlogo.com/";
+      document.write(
+        unescape(
+          "%3Cscript src='" +
+            tlJsHost +
+            "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"
+        )
+      );
+      //]]>
+    </script>
+    <script language="JavaScript" type="text/javascript">
+      TrustLogo(
+        "https://www.positivessl.com/images/seals/positivessl_trust_seal_lg_222x54.png",
+        "POSDV",
+        "none"
+      );
+    </script>
+  </body>
+</html>
