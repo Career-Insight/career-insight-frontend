@@ -13,6 +13,8 @@ import Verification from "./pages/Verification/Verification";
 import Login from "./pages/Login/Login";
 import { AuthProvider } from "./context/authentication";
 import Protactedroute from "./components/Protactedroute/Protactedroute";
+import Dashboard from "./pages/Careers/Dashboard/Dashboard";
+import Company from "./pages/Careers/Company/Company";
 
 const router = createBrowserRouter([
   {
@@ -30,10 +32,15 @@ const router = createBrowserRouter([
       {
         path: "careers",
         element: (
-          <Protactedroute>
+          // <Protactedroute>
             <Careers />
-          </Protactedroute>
+          // </Protactedroute>
         ),
+        children: [
+          { path: "/", element: <Dashboard /> },
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "company", element: <Company /> },
+        ],
       },
       {
         path: "roadmaps",

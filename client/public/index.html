@@ -17,7 +17,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       //<![CDATA[
       var tlJsHost =
         window.location.protocol == "https:"
@@ -39,5 +39,24 @@
         "none"
       );
     </script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // Use a timer to check if the TrustLogo <a> tag has been added to the DOM
+        var checkExist = setInterval(function () {
+          var trustLogoLink = $("a[href*='trustlogo']");
+          if (trustLogoLink.length) {
+            clearInterval(checkExist);
+            // Now you can manipulate the <a> tag
+            trustLogoLink.attr("id", "trustLogoLink");
+            trustLogoLink.css({
+              "text-decoration": "none",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+            });
+          }
+        }, 100); // Check every 100 milliseconds
+      });
+    </script> -->
   </body>
 </html>

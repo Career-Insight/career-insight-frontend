@@ -51,7 +51,7 @@ export default function Login() {
         sameSite: "strict",
       });
     } catch (error) {
-      setFail(error.response.data.msg);
+      setFail(error.response.data?.msg);
     }
     setLoading(false);
   }
