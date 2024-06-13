@@ -9,17 +9,17 @@
 
 .sidebardashboard__li .sidebardashboard__li__a1 {
   background-color: var(--pc);
-  width: 192px;
+  width: 100%;
   height: 100%;
-  padding-left: 15px;
+  padding: 15px;
   border-radius: 8px;
   position: relative;
 }
 .sidebardashboard__li .sidebardashboard__li__a2 {
   background-color: var(--wc);
-  width: 192px;
+  width: 100%;
   height: 100%;
-  padding-left: 15px;
+  padding: 15px;
   border-radius: 8px;
   position: relative;
 }

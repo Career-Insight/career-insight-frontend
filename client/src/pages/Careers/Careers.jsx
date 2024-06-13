@@ -13,7 +13,7 @@ export default function Careers() {
         <title>career insight | careers</title>
       </Helmet>
       <section className="row m-0 p-0">
-        <aside className={`${careersCSS.sidebardashboard} col-md-2 p-0`}>
+        <aside className={`${careersCSS.sidebardashboard} col-md-2 col-12 p-0`}>
           <ul className="w-100 h-100 py-4">
             <li className={`${careersCSS.sidebardashboard__li} w-100`}>
               <NavLink
@@ -55,7 +55,7 @@ export default function Careers() {
             </li>
           </ul>
         </aside>
-        <div className="bg-g col-md-10 py-4">
+        <div className="bg-g col-md-10 col-12 py-4">
           <Outlet />
         </div>
       </section>
