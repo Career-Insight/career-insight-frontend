@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        sudo docker run -d -p 3000:3000 --name careerinsight careerinsight
+                       echo 1 | sudo -S docker run -d -p 3000:3000 --name careerinsight careerinsight
                     '''
                 }
             }
