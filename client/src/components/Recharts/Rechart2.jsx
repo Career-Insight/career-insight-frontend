@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactEcharts from "echarts-for-react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Rechart2() {
+  const [pieData, setPieData] = useState([]);
+  useEffect(() => {
+    pieApiCalling();
+  }, []);
+  async function pieApiCalling() {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/dashboard/general/frontend-technologies/5",
+        { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+      );
+      setPieData(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
   const getOption = () => {
     return {
       title: {
@@ -25,13 +42,10 @@ export default function Rechart2() {
           name: "Access From",
           type: "pie",
           radius: "50%",
-          data: [
-            { value: 1048, name: "Search Engine" },
-            { value: 735, name: "Direct" },
-            { value: 580, name: "Email" },
-            { value: 484, name: "Union Ads" },
-            { value: 300, name: "Video Ads" },
-          ],
+          data: pieData.map((item) => ({
+            value: item.v,
+            name: item.k,
+          })),
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
@@ -43,7 +57,6 @@ export default function Rechart2() {
       ],
     };
   };
-
   return (
     <ReactEcharts
       option={getOption()}

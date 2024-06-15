@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Rechart3() {
-  const data = [
+  const [distributionOfOfferings, setDistributionOfOfferings] = useState([]);
+
+  useEffect(() => {
+    DistributionOfOfferingsCalling();
+  }, []);
+
+  async function DistributionOfOfferingsCalling() {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/dashboard/general/offering-distributions",
+        { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+      );
+      setDistributionOfOfferings(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  const chartData = [
     [
       "Element",
       "Density",
@@ -14,24 +34,27 @@ export default function Rechart3() {
         calc: "stringify",
       },
     ],
-    ["Copper", 8.94, "#357AF6", null],
-    ["Silver", 10.49, "#357AF6", null],
-    ["Gold", 19.3, "#357AF6", null],
-    ["Platinum", 21.45, "color: #357AF6", null],
   ];
 
+  distributionOfOfferings.forEach((item) => {
+    chartData.push([item.k, Number(item.v), "#357AF6", null]);
+  });
+
   const options = {
-    bar: { groupWidth: "95%" },
+    bar: { groupWidth: "80%" },
     legend: { position: "none" },
     height: 280,
   };
+
   return (
-    <Chart
-      chartType="BarChart"
-      width="100%"
-      height="100%"
-      data={data}
-      options={options}
-    />
+    <div>
+      <Chart
+        chartType="BarChart"
+        width="100%"
+        height="100%"
+        data={chartData}
+        options={options}
+      />
+    </div>
   );
 }

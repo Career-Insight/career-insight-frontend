@@ -1,43 +1,61 @@
-import React from "react";
-import { Chart } from "react-google-charts";
+import React, { useEffect, useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+
+export const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
 
 export default function Rechart4() {
-  const data = [
-    [
-      "Element",
-      "Density",
-      { role: "style" },
+  const [jobByCountry, setjobByCountry] = useState([]);
+
+  useEffect(() => {
+    jobByCountryCalling();
+  }, []);
+
+  async function jobByCountryCalling() {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/dashboard/general/programming-languages/10",
+        { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+      );
+      setjobByCountry(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+  console.log("jobByCountry", jobByCountry);
+  const labels = jobByCountry.map((item) => item.k);
+
+  const data = {
+    labels: labels,
+    datasets: [
       {
-        sourceColumn: 0,
-        role: "annotation",
-        type: "string",
-        calc: "stringify",
+        label: "My First Dataset",
+        data: jobByCountry.map((item) => item.v),
+        backgroundColor: ["#357AF6"],
+        borderColor: ["#357AF6"],
+        borderWidth: 1,
+        barThickness: 15, // Set the bar thickness here
       },
     ],
-    ["Copper", 80.94, "#357AF6", null],
-    ["Silver", 100.49, "#357AF6", null],
-    ["Gold", 190.3, "#357AF6", null],
-    ["Platinum", 210.45, "color: #357AF6", null],
-    ["Platinum1", 201.45, "color: #357AF6", null],
-    ["Platinum2", 300.45, "color: #357AF6", null],
-    ["Platinum3", 440.45, "color: #357AF6", null],
-    ["Platinum4", 500.45, "color: #357AF6", null],
-    ["Platinum5", 600.45, "color: #357AF6", null],
-  ];
-
-  const options = {
-    bar: { groupWidth: "50%" },
-    legend: { position: "none" },
-    height: 250,
   };
-
   return (
-    <Chart
-      chartType="ColumnChart"
-      width="100%"
-      height="100%"
-      data={data}
-      options={options}
-    />
+    <div style={{ width: "100%", height: "92%" }}>
+      <Bar options={options} data={data} />
+    </div>
   );
 }
