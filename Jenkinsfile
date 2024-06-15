@@ -1,7 +1,15 @@
 pipeline {
     agent { label 'frontend' } // specify the frontend agent
+    
 
     stages {
+        stage('remove old directory') {
+            steps {
+                script {
+                    sh 'rm -rf /home/react-app/career-insight-frontend'
+                }
+            }
+        }
         stage('Check Git Installation') {
             steps {
                 script {
@@ -29,7 +37,7 @@ pipeline {
 
         stage('Navigate to Client Directory') {
             steps {
-                dir('/home/react-app/career-insight-frontend/client') {
+                dir('/home/react-app/career-insight-frontend/workspace/react/client') {
                     script {
                         sh '''
                             docker rm -f careerinsight || true
