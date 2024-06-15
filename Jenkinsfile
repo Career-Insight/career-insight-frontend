@@ -2,11 +2,19 @@ pipeline {
     agent { label 'frontend' } // specify the frontend agent
 
     stages {
-        stage('Clone Repository') {
+        stage('Navigate to Repository') {
             steps {
-                script {
-                    dir('/home/react-app') {
-                        git 'https://github.com/Career-Insight/career-insight-frontend.git'
+                dir('/home/react-app') {
+                    script {
+                        sh '''
+                            if [ -d "career-insight-frontend" ]; then
+                                cd career-insight-frontend
+                                git pull
+                            else
+                                git clone https://github.com/Career-Insight/career-insight-frontend.git
+                                cd career-insight-frontend
+                            fi
+                        '''
                     }
                 }
             }
