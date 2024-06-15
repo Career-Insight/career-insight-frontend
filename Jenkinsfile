@@ -2,6 +2,14 @@ pipeline {
     agent { label 'frontend' } // specify the frontend agent
 
     stages {
+        stage('Check Git Installation') {
+            steps {
+                script {
+                    sh 'git --version || (echo "Git is not installed. Exiting." && exit 1)'
+                }
+            }
+        }
+        
         stage('Navigate to Repository') {
             steps {
                 dir('/home/react-app') {
@@ -12,7 +20,6 @@ pipeline {
                                 git pull
                             else
                                 git clone https://github.com/Career-Insight/career-insight-frontend.git
-                                cd career-insight-frontend
                             fi
                         '''
                     }
