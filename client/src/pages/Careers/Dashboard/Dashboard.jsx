@@ -31,7 +31,7 @@ import { BallTriangle } from "react-loader-spinner";
 export default function Dashboard() {
   const [jobsCount, setJobsCount] = useState(0);
   const [skillsCount, setSkillsCount] = useState(0);
-  const [dataBarBackend, setDataBarBackend] = useState(null);
+  const [dataBarBackend, setDataBarBackend] = useState([]);
   const [dataBarJob, setDataBarJob] = useState([]);
   const [selectedSkillTrack, setSelectedSkillTrack] = useState("full stack");
   const [selectedJobMonth, setSelectedJobMonth] = useState("year");

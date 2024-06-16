@@ -37,7 +37,6 @@ export default function Rechart4() {
       console.log("error", error);
     }
   }
-  console.log("jobByCountry", jobByCountry);
   const labels = jobByCountry.map((item) => item.k);
 
   const data = {

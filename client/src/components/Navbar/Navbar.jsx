@@ -50,9 +50,10 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:flex  items-center">
                   <div className="flex space-x-4">
                     <NavLink
-                      to="/home"
+                      to="/docs"
                       className={(navData) =>
-                        navData.isActive
+                        navData.isActive ||
+                        typeof navData.isActive === "undefined"
                           ? "text-lg  text-pc transition rounded-md px-3 py-2 font-medium"
                           : "text-lg text-bc hover:text-pc transition rounded-md px-3 py-2 font-medium"
                       }

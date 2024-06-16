@@ -72,7 +72,7 @@ const Rechart1 = ({ selectedSkillTrackvalue }) => {
           // textAnchor="end" // Anchor text to the end of the tick
         />
         <YAxis
-          tick={{ fill: "#1C1C1C66", fontSize: "15" }}
+          tick={{ fill: "#1C1C1C66", fontSize: "15", fontWeight: "bold" }}
           axisLine={false}
           tickLine={false}
         />

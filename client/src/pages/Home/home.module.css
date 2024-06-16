@@ -3,7 +3,6 @@
   height: calc(100vh - 4rem);
   margin: 0 auto;
   position: relative;
-  background-color: red;
 }
 .hero__con {
   position: absolute;

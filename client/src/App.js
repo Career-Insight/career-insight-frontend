@@ -15,6 +15,8 @@ import { AuthProvider } from "./context/authentication";
 import Protactedroute from "./components/Protactedroute/Protactedroute";
 import Dashboard from "./pages/Careers/Dashboard/Dashboard";
 import Company from "./pages/Careers/Company/Company";
+import { QueryClient, QueryClientProvider } from "react-query";
+import CompanyDetails from "./pages/Careers/CompanyDetails/CompanyDetails";
 
 const router = createBrowserRouter([
   {
@@ -26,20 +28,21 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "home",
+        path: "docs",
         element: <Home />,
       },
       {
         path: "careers",
         element: (
           // <Protactedroute>
-            <Careers />
+          <Careers />
           // </Protactedroute>
         ),
         children: [
           { path: "", element: <Dashboard /> },
           { path: "dashboard", element: <Dashboard /> },
           { path: "company", element: <Company /> },
+          { path: ":companydetails", element: <CompanyDetails /> },
         ],
       },
       {
@@ -87,10 +90,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const queryVar = new QueryClient();
   return (
     <>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryVar}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </AuthProvider>
     </>
   );

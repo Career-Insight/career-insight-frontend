@@ -1,21 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import { BallTriangle } from "react-loader-spinner";
 export default function Canvadots() {
   const [init, setInit] = useState(false);
+  const particlesInit = useRef(false); // useRef to track initialization state
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    if (!particlesInit.current) {
+      initParticlesEngine(async (engine) => {
+        await loadSlim(engine);
+      }).then(() => {
+        setInit(true);
+        particlesInit.current = true; // set to true after initialization
+      });
+    }
   }, []);
 
   const particlesLoaded = (container) => {
     console.log(container);
   };
-
+  if (!init || !particlesInit.current) {
+    return (
+      <div className="w-100 h-[100vh] bg-wc z-50 flex justify-center items-center fixed top-0 left-0">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#323efb"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+  }
   return (
     <>
       <Particles
