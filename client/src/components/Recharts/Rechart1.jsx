@@ -34,7 +34,7 @@ const Rechart1 = ({ selectedSkillTrackvalue }) => {
     const skillTrackApiCalling = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/api/v1/dashboard/jobs/skill/${selectedSkillTrackvalue}`,
+          `http://185.69.167.185:32381/api/v1/dashboard/jobs/skill/${selectedSkillTrackvalue}`,
           { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
         );
         const resultArray = Object.entries(data).map(([key, value]) => {

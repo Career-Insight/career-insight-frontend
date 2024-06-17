@@ -29,7 +29,7 @@ export default function Rechart4() {
   async function jobByCountryCalling() {
     try {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/dashboard/general/programming-languages/10",
+        "http://185.69.167.185:32381/api/v1/dashboard/general/programming-languages/10",
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setjobByCountry(data);

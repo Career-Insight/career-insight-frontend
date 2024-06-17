@@ -37,12 +37,12 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/auth/login",
+        "http://185.69.167.185:32381/api/v1/auth/login",
         values
       );
       setSuccess(data.message);
       setTimeout(() => {
-        navigate("/home");
+        navigate("/docs");
       }, 2000);
       setToken(data.access_token);
       Cookies.set("token", data.access_token, {

@@ -10,7 +10,7 @@ import { useQuery } from "react-query";
 
 async function getCompaniesNames() {
   const { data } = await axios.get(
-    "http://localhost:8000/api/v1/company/get-companies-data",
+    "http://185.69.167.185:32381/api/v1/company/get-companies-data",
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;
@@ -19,7 +19,7 @@ async function getCompaniesNames() {
 export default function Careers() {
   const { data, isLoading, error } = useQuery("companies", getCompaniesNames);
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return (
       <div className="w-100 h-[100vh] flex justify-center items-center">
         <BallTriangle

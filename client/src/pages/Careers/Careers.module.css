@@ -1,4 +1,8 @@
 .sidebardashboard {
+  /* height: 140vh; Allow height to adjust dynamically */
+  /* overflow: auto; */
+}
+.sidebardashboard ul{
   height: 140vh; /* Allow height to adjust dynamically */
   overflow: auto;
 }
