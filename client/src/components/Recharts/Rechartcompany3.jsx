@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as echarts from "echarts/core";
 import {
   DatasetComponent,
@@ -10,6 +10,9 @@ import {
 import { LineChart } from "echarts/charts";
 import { UniversalTransition } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { BallTriangle } from "react-loader-spinner";
 
 echarts.use([
   DatasetComponent,
@@ -22,113 +25,109 @@ echarts.use([
   UniversalTransition,
 ]);
 
-const Rechartcompany3 = ({ selectedCompanyName }) => {
+const getCompanyNameSelect = async (companyname) => {
+  console.log("companyname", companyname);
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8000/api/v1/review/get-rating/?company_name=${companyname}`,
+      { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+    );
+    console.log("data", data);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+    return null;
+  }
+};
+
+const preprocessData = (data) => {
+  return data.filter((item) => item._id >= "2008-01");
+};
+
+const EChartsComponent = ({ companyname }) => {
   const chartRef = useRef(null);
-//   console.log(selectedCompanyName);
-  // Define the raw data directly in the component
-  const rawData = [
-    ["Country", "Year", "Income"],
-    ["Germany", 1950, 10000],
-    ["Germany", 1960, 12000],
-    ["Germany", 1970, 15000],
-    ["Germany", 1980, 20000],
-    ["Germany", 1990, 25000],
-    ["Germany", 2000, 30000],
-    ["Germany", 2010, 35000],
-    ["Germany", 2020, 40000],
-    ["France", 1950, 11000],
-    ["France", 1960, 13000],
-    ["France", 1970, 16000],
-    ["France", 1980, 21000],
-    ["France", 1990, 26000],
-    ["France", 2000, 31000],
-    ["France", 2010, 36000],
-    ["France", 2020, 41000],
-  ];
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const chartInstance = echarts.init(chartRef.current);
+    const fetchDataAndRenderChart = async () => {
+      setLoading(true);
+      const chartDom = chartRef.current;
+      const myChart = echarts.init(chartDom);
 
-    const run = (rawData, chartInstance) => {
+      const _rawData = await getCompanyNameSelect(companyname);
+
+      if (!_rawData) {
+        setLoading(false);
+        return;
+      }
+
+      const filteredData = preprocessData(_rawData);
+
       const option = {
-        dataset: [
-          {
-            id: "dataset_raw",
-            source: rawData,
-          },
-          {
-            id: "dataset_since_1950_of_germany",
-            fromDatasetId: "dataset_raw",
-            transform: {
-              type: "filter",
-              config: {
-                and: [
-                  { dimension: "Year", gte: 1950 },
-                  { dimension: "Country", "=": "Germany" },
-                ],
-              },
-            },
-          },
-          {
-            id: "dataset_since_1950_of_france",
-            fromDatasetId: "dataset_raw",
-            transform: {
-              type: "filter",
-              config: {
-                and: [
-                  { dimension: "Year", gte: 1950 },
-                  { dimension: "Country", "=": "France" },
-                ],
-              },
-            },
-          },
-        ],
+        dataset: {
+          source: filteredData,
+        },
         tooltip: {
           trigger: "axis",
         },
         xAxis: {
           type: "category",
+          name: "Date",
           nameLocation: "middle",
+          nameGap: 30, // Add margin between name and axis
         },
         yAxis: {
-          name: "Income",
+          name: "Average Rating",
         },
         series: [
           {
             type: "line",
-            datasetId: "dataset_since_1950_of_germany",
             showSymbol: false,
             encode: {
-              x: "Year",
-              y: "Income",
-              itemName: "Year",
-              tooltip: ["Income"],
-            },
-          },
-          {
-            type: "line",
-            datasetId: "dataset_since_1950_of_france",
-            showSymbol: false,
-            encode: {
-              x: "Year",
-              y: "Income",
-              itemName: "Year",
-              tooltip: ["Income"],
+              x: "_id",
+              y: "avg_rating",
+              itemName: "_id",
+              tooltip: ["avg_rating"],
             },
           },
         ],
       };
-      chartInstance.setOption(option);
+
+      myChart.setOption(option);
+      setLoading(false);
+
+      // Cleanup on component unmount
+      return () => {
+        myChart.dispose();
+      };
     };
 
-    run(rawData, chartInstance);
+    fetchDataAndRenderChart();
+  }, [companyname]);
 
-    return () => {
-      chartInstance.dispose();
-    };
-  }, []);
-
-  return <div ref={chartRef} style={{ width: "100%", height: "400px" }}></div>;
+  return (
+    <div style={{ width: "100%", height: "500px", position: "relative" }}>
+      {loading && (
+        <div
+          className="w-100 h-100 flex justify-center items-center"
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+        >
+          <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#323efb"
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+          />
+        </div>
+      )}
+      <div
+        ref={chartRef}
+        style={{ width: "100%", height: "100%", opacity: loading ? 0 : 1 }}
+      ></div>
+    </div>
+  );
 };
 
-export default Rechartcompany3;
+export default EChartsComponent;

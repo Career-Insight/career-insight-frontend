@@ -2,12 +2,7 @@ import React, { useContext, useState } from "react";
 import Rechartcompany1 from "./../../../components/Recharts/Rechartcompany1";
 import Rechartcompany2 from "./../../../components/Recharts/Rechartcompany2";
 import Rechartcompany3 from "./../../../components/Recharts/Rechartcompany3";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
 import {
   Select,
   SelectContent,
@@ -19,13 +14,12 @@ import { companyNamesContext } from "./../../../context/companiesnames";
 
 export default function Company() {
   const { companyNamesData } = useContext(companyNamesContext);
-  const [selectedCompanyName, setSelectedCompanyName] = useState("Amazon");
+  const [selectedCompanyName, setSelectedCompanyName] = useState("IBM");
 
   function getCompanyNameSelect(value) {
     setSelectedCompanyName(value);
   }
 
-  console.log(selectedCompanyName);
   return (
     <>
       <div className="row justify-content-between mb-3">
@@ -48,10 +42,10 @@ export default function Company() {
         </div>
       </div>
       <div className="my-3">
-        <Card className="p-3 h-96">
+        <Card className="p-3">
           <div className="flex justify-between items-center">
             <div className="text-lg font-bold mb-3">
-              Frequency of job posting
+              Average rating for {selectedCompanyName}
             </div>
             <Select
               onValueChange={function (value) {
@@ -59,7 +53,7 @@ export default function Company() {
               }}
             >
               <SelectTrigger className="w-[120px]">
-                <SelectValue placeholder="Amazon" />
+                <SelectValue placeholder="IBM" />
               </SelectTrigger>
               <SelectContent>
                 {companyNamesData.slice(174).map((company, idx) => {
