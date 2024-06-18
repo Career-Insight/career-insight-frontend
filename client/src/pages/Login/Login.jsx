@@ -37,7 +37,7 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://185.69.167.185:32381/api/v1/auth/login",
+        "http://localhost:8000/api/v1/auth/login",
         values
       );
       setSuccess(data.message);

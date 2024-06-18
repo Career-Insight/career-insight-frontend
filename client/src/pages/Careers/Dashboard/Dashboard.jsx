@@ -69,7 +69,7 @@ export default function Dashboard() {
   async function dataBarBackendApiCalling() {
     try {
       const { data } = await axios.get(
-        "http://185.69.167.185:32381/api/v1/dashboard/general/backend-technologies/5",
+        "http://localhost:8000/api/v1/dashboard/general/backend-technologies/5",
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setDataBarBackend(data);
@@ -112,7 +112,7 @@ export default function Dashboard() {
   async function dataBarJobApiCalling() {
     try {
       const { data } = await axios.get(
-        `http://185.69.167.185:32381/api/v1/dashboard/jobs${
+        `http://localhost:8000/api/v1/dashboard/jobs${
           selectedJobMonth !== "year" ? `?year=${selectedJobMonth}` : ""
         }`,
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
@@ -130,7 +130,7 @@ export default function Dashboard() {
   async function callApis(setdata, endpoint) {
     try {
       const { data } = await axios.get(
-        `http://185.69.167.185:32381/api/v1/${endpoint}`,
+        `http://localhost:8000/api/v1/${endpoint}`,
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setdata(data.count);

@@ -17,6 +17,7 @@ import Dashboard from "./pages/Careers/Dashboard/Dashboard";
 import Company from "./pages/Careers/Company/Company";
 import { QueryClient, QueryClientProvider } from "react-query";
 import CompanyDetails from "./pages/Careers/CompanyDetails/CompanyDetails";
+import { CompanyNamesProvider } from "./context/companiesnames";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
         path: "careers",
         element: (
           // <Protactedroute>
-          <Careers />
+          <CompanyNamesProvider>
+            <Careers />
+          </CompanyNamesProvider>
           // </Protactedroute>
         ),
         children: [

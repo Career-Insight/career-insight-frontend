@@ -1,6 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
+import { BallTriangle } from "react-loader-spinner";
+import { useQuery } from "react-query";
 import {
   BarChart,
   Bar,
@@ -27,43 +29,48 @@ const CustomBackground = (props) => {
   );
 };
 
-const Rechart1 = ({ selectedSkillTrackvalue }) => {
-  const [data, setData] = useState([]);
+const fetchReviews = async () => {
+  const { data } = await axios.get(
+    `http://localhost:8000/api/v1/review/get-reviews/`,
+    { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+  );
+  return data;
+};
 
-  useEffect(() => {
-    const skillTrackApiCalling = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:8000/api/v1/dashboard/jobs/skill/${selectedSkillTrackvalue}`,
-          { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
-        );
-        const resultArray = Object.entries(data).map(([key, value]) => {
-          return { name: key.split(" ").slice(0, 1), uv: value.count };
-        });
-        setData(resultArray);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-    skillTrackApiCalling();
-  }, [selectedSkillTrackvalue]);
-
+const Rechartcompany1 = () => {
+  const { data: dataChart = [] } = useQuery("reviews", fetchReviews);
+  if (dataChart.length === 0) {
+    return (
+      <div className="w-100 h-100 flex justify-center items-center">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#323efb"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+  }
   return (
     <ResponsiveContainer width="100%" height={280}>
       <BarChart
-        data={data.slice(0, 10)}
+        data={dataChart}
         barSize={20} // Custom bar width
         margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(50, 62, 251, 0.38)" />
-            <stop offset="75%" stopColor="rgba(50, 62, 251, 0.94)" />
+            <stop offset="0%" stopColor="rgba(56, 118, 191, 0.38)" />
+            <stop offset="75%" stopColor="rgba(56, 118, 191, 0.94)" />
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="#CCCCCC" />
         <XAxis
-          dataKey="name"
+          dataKey="company_name"
           tick={{ fill: "#1C1C1C66", fontSize: "15" }}
           axisLine={false}
           tickLine={false}
@@ -80,7 +87,7 @@ const Rechart1 = ({ selectedSkillTrackvalue }) => {
           contentStyle={{ backgroundColor: "#fff", border: "1px solid #ccc" }}
         />
         <Bar
-          dataKey="uv"
+          dataKey="count"
           fill="url(#colorUv)"
           background={<CustomBackground fill="#eee" radius={8} />}
           radius={[8, 8, 8, 8]}
@@ -90,4 +97,4 @@ const Rechart1 = ({ selectedSkillTrackvalue }) => {
   );
 };
 
-export default Rechart1;
+export default Rechartcompany1;

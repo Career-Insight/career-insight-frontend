@@ -19,7 +19,7 @@ import companyDetaildCSS from "./CompanyDetails.module.css";
 // Fetch function using axios
 const fetchCompanyDetails = async (companydetails) => {
   const { data } = await axios.get(
-    `http://185.69.167.185:32381/api/v1/company/get-company?company_name=${companydetails}`,
+    `http://localhost:8000/api/v1/company/get-company?company_name=${companydetails}`,
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;
@@ -75,7 +75,6 @@ export default function CompanyDetails() {
       </div>
     );
   }
-  console.log(data);
 
   let settings = {
     dots: true,
@@ -133,7 +132,7 @@ export default function CompanyDetails() {
           <CardTitle className="text-sm flex w-full  font-medium">
             <div className="w-[150px] h-[150px]">
               <img
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 src={data.og_image}
                 alt={`${data.company_name} logo`}
               />
@@ -217,10 +216,7 @@ export default function CompanyDetails() {
             <Slider {...settings}>
               {data.Popular_Careers.map((career, index) => {
                 return (
-                  <div
-                    key={index}
-                    className={`${companyDetaildCSS.slidercompany} px-2`}
-                  >
+                  <div key={index} className="h-28 md:h-40 px-2">
                     <div className="p-3 h-full flex flex-col justify-between border border-gray-500 rounded-md">
                       <h3 className="text-xl text-pc font-medium">{career}</h3>
                       <p className="text-gray-500">

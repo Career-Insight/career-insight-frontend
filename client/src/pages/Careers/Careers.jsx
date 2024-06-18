@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { CircleGauge } from "lucide-react";
 import Cookies from "js-cookie";
@@ -7,17 +7,21 @@ import careersCSS from "./Careers.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { BallTriangle } from "react-loader-spinner";
 import { useQuery } from "react-query";
-
-async function getCompaniesNames() {
-  const { data } = await axios.get(
-    "http://185.69.167.185:32381/api/v1/company/get-companies-data",
-    { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
-  );
-  return data;
-}
+import { companyNamesContext } from "./../../context/companiesnames";
 
 export default function Careers() {
-  const { data, isLoading, error } = useQuery("companies", getCompaniesNames);
+  const { setCompanyNamesData } = useContext(companyNamesContext);
+
+  const getCompaniesNames = async () => {
+    const { data } = await axios.get(
+      "http://localhost:8000/api/v1/company/get-companies-data",
+      { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+    );
+    setCompanyNamesData(data);
+    return data;
+  };
+
+  const { data, isLoading } = useQuery("companies", getCompaniesNames);
 
   if (isLoading || !data) {
     return (
