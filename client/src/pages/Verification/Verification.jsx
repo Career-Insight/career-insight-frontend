@@ -81,7 +81,7 @@ export default function Verification() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/auth/verify",
+        "http://185.69.167.185:32381/api/v1/auth/verify",
         callObj
       );
       setSuccess(data.message);

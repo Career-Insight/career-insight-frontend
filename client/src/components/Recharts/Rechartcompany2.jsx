@@ -25,7 +25,7 @@ ChartJS.register(
 
 const fetchCompaniesReviews = async () => {
   const { data } = await axios.get(
-    "http://localhost:8000/api/v1/review/best-companies/",
+    "http://185.69.167.185:32381/api/v1/review/best-companies/",
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;

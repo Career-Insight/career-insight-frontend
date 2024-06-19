@@ -72,7 +72,7 @@ export default function Signup() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/auth/register",
+        "http://185.69.167.185:32381/api/v1/auth/register",
         values
       );
       setSuccess(data.message);

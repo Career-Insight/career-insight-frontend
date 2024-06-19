@@ -37,10 +37,12 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/auth/login",
+        "http://185.69.167.185:32381/api/v1/auth/login",
         values
       );
-      setSuccess(data.message);
+      if (data.message) {
+        setSuccess(data.message);
+      }
       setTimeout(() => {
         navigate("/docs");
       }, 2000);
@@ -51,7 +53,11 @@ export default function Login() {
         sameSite: "strict",
       });
     } catch (error) {
-      setFail(error.response.data?.msg);
+      if (error.response && error.response.data) {
+        setFail(error.response.data.msg);
+      } else {
+        setFail("An unexpected error occurred. Please try again.");
+      }
     }
     setLoading(false);
   }
