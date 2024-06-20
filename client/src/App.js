@@ -18,87 +18,191 @@ import Company from "./pages/Careers/Company/Company";
 import { QueryClient, QueryClientProvider } from "react-query";
 import CompanyDetails from "./pages/Careers/CompanyDetails/CompanyDetails";
 import { CompanyNamesProvider } from "./context/companiesnames";
-
-const router = createBrowserRouter([
-  {
-    path: "",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "docs",
-        element: <Home />,
-      },
-      {
-        path: "careers",
-        element: (
-          // <Protactedroute>
-          <CompanyNamesProvider>
-            <Careers />
-          </CompanyNamesProvider>
-          // </Protactedroute>
-        ),
-        children: [
-          { path: "", element: <Dashboard /> },
-          { path: "dashboard", element: <Dashboard /> },
-          { path: "company", element: <Company /> },
-          { path: ":companydetails", element: <CompanyDetails /> },
-        ],
-      },
-      {
-        path: "roadmaps",
-        element: (
-          <Protactedroute>
-            <Roadmaps />
-          </Protactedroute>
-        ),
-      },
-      {
-        path: "aboutus",
-        element: <Aboutus />,
-      },
-      {
-        path: "faqs",
-        element: <Faqs />,
-      },
-      {
-        path: "profile",
-        element: (
-          <Protactedroute>
-            <Profile />
-          </Protactedroute>
-        ),
-      },
-      {
-        path: "*",
-        element: <Notfound />,
-      },
-    ],
-  },
-  {
-    path: "signup",
-    element: <Signup />,
-  },
-  {
-    path: "verification/:email",
-    element: <Verification />,
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-]);
+import { useState } from "react";
+import FirstMainQ from "./components/Steps/FristMainQ";
+import { Toaster } from "react-hot-toast";
+import SecondMainQ from "./components/Steps/SecondMainQ";
+import DataScienceStep1 from "./components/Steps/DataSciencePath/DataScienceStep1";
+import DataScienceStep2 from "./components/Steps/DataSciencePath/DataScienceStep2";
+import DataScienceStep3 from "./components/Steps/DataSciencePath/DataScienceStep3";
+import DataScienceStep4 from "./components/Steps/DataSciencePath/DataScienceStep4";
+import DataScienceStep5 from "./components/Steps/DataSciencePath/DataScienceStep5";
 
 function App() {
+  const [formData, setFormData] = useState({
+    reason: "",
+    path: "",
+    dataScience: {
+      option: "",
+      learnFundamentalsR: "",
+      learnDataWrangling: "",
+      rSkills: {
+        dataManipulation: "",
+        statisticalModeling: "",
+        visualization: "",
+        programming: "",
+      },
+      dataWranglingSkills: {
+        cleaning: "",
+        transformation: "",
+        merging: "",
+        aggregation: "",
+      },
+    },
+    backEnd: {
+      framework: "",
+    },
+    frontEnd: {
+      framework: "",
+    },
+    devOps: {
+      option: "",
+    },
+  });
+  const router = createBrowserRouter([
+    {
+      path: "",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "docs",
+          element: <Home />,
+        },
+        {
+          path: "careers",
+          element: (
+            <Protactedroute>
+              <CompanyNamesProvider>
+                <Careers />
+              </CompanyNamesProvider>
+            </Protactedroute>
+          ),
+          children: [
+            { path: "", element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard /> },
+            { path: "company", element: <Company /> },
+            { path: ":companydetails", element: <CompanyDetails /> },
+          ],
+        },
+        {
+          path: "roadmaps",
+          element: (
+            // <Protactedroute>
+            <Roadmaps />
+            // </Protactedroute>
+          ),
+          children: [
+            {
+              path: "",
+              element: (
+                <FirstMainQ formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "first-main-q",
+              element: (
+                <FirstMainQ formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "second-main-q",
+              element: (
+                <SecondMainQ formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "dataScienceStep1",
+              element: (
+                <DataScienceStep1
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "dataScienceStep2",
+              element: (
+                <DataScienceStep2
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "dataScienceStep3",
+              element: (
+                <DataScienceStep3
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "dataScienceStep4",
+              element: (
+                <DataScienceStep4
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "dataScienceStep5",
+              element: (
+                <DataScienceStep5
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+          ],
+        },
+        {
+          path: "aboutus",
+          element: <Aboutus />,
+        },
+        {
+          path: "faqs",
+          element: <Faqs />,
+        },
+        {
+          path: "profile",
+          element: (
+            <Protactedroute>
+              <Profile />
+            </Protactedroute>
+          ),
+        },
+        {
+          path: "*",
+          element: <Notfound />,
+        },
+      ],
+    },
+    {
+      path: "signup",
+      element: <Signup />,
+    },
+    {
+      path: "verification/:email",
+      element: <Verification />,
+    },
+    {
+      path: "login",
+      element: <Login />,
+    },
+  ]);
   const queryVar = new QueryClient();
   return (
     <>
       <AuthProvider>
         <QueryClientProvider client={queryVar}>
           <RouterProvider router={router} />
+          <Toaster position="bottom-center" />
         </QueryClientProvider>
       </AuthProvider>
     </>

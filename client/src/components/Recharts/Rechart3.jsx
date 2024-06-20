@@ -13,7 +13,7 @@ export default function Rechart3() {
   async function DistributionOfOfferingsCalling() {
     try {
       const { data } = await axios.get(
-        "http://185.69.167.185:32381/api/v1/dashboard/general/offering-distributions",
+        "https://career-insight.me/api/v1/dashboard/general/offering-distributions",
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setDistributionOfOfferings(data);

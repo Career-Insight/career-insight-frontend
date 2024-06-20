@@ -31,7 +31,7 @@ const CustomBackground = (props) => {
 
 const fetchReviews = async () => {
   const { data } = await axios.get(
-    `http://185.69.167.185:32381/api/v1/review/get-reviews/`,
+    `https://career-insight.me/api/v1/review/get-reviews/`,
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;

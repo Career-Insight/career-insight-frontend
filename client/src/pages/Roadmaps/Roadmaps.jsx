@@ -1,5 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
-export default function Roadmaps() {
-  return <div className="text-3xl text-pc">Hello Roadmaps</div>;
-}
+const Roadmaps = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
+
+export default Roadmaps;

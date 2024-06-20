@@ -14,7 +14,7 @@ export default function Careers() {
 
   const getCompaniesNames = async () => {
     const { data } = await axios.get(
-      "http://185.69.167.185:32381/api/v1/company/get-companies-data",
+      "https://career-insight.me/api/v1/company/get-companies-data",
       { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
     );
     setCompanyNamesData(data);

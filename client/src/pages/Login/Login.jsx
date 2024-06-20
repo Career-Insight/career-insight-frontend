@@ -37,7 +37,7 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://185.69.167.185:32381/api/v1/auth/login",
+        "https://career-insight.me/api/v1/auth/login",
         values
       );
       if (data.message) {
