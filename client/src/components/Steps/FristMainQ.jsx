@@ -22,22 +22,22 @@ const FirstMainQ = ({ formData, setFormData }) => {
   };
 
   return (
-    <div className="h-[100vh] bg-gray-200 flex flex-col justify-center items-center">
+    <div className="container-roadmap h-[100vh] bg-gray-100 flex flex-col justify-center items-center">
       <div class="radio-input">
         <h2 className="text-2xl font-bold mb-6">
           1. Let’s get started. What brings you to Career Insight?
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center"
-        >
+          className="flex flex-col items-center w-full max-w-lg p-5 bg-white shadow-md rounded"
+          >
           <input
             id="value-1"
             type="radio"
             value="learn_new"
             {...register("reason", { required: true })}
           />{" "}
-          <label className="mb-4" for="value-1">
+          <label className="mb-4" htmlFor="value-1">
             <div class="text">
               <span class="circle"></span>
               <span className="ml-2">I want to learn something new</span>
@@ -49,7 +49,7 @@ const FirstMainQ = ({ formData, setFormData }) => {
             value="chat"
             {...register("reason", { required: true })}
           />
-          <label className="mb-4" for="value-2">
+          <label className="mb-4" htmlFor="value-2">
             <div class="text">
               <span class="circle"></span>
               <span className="ml-2">Chat with Career Insight</span>

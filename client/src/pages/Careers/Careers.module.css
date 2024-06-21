@@ -1,9 +1,16 @@
 .sidebardashboard {
-  /* height: 140vh; Allow height to adjust dynamically */
-  /* overflow: auto; */
+  position: relative;
 }
-.sidebardashboard ul{
-  height: 140vh; /* Allow height to adjust dynamically */
+.fixed_ul_container {
+  position: sticky;
+  top: 0; /* Adjust this value as needed */
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+.sidebardashboard .fixed_ul_container ul {
+  /* Allow height to adjust dynamically */
   overflow: auto;
 }
 .sidebardashboard__li {
@@ -60,6 +67,8 @@
   color: var(--pc);
 }
 .dashcon {
-  min-height: 140vh; /* Minimum height of 150vh */
-  height: auto; /* Allow height to adjust dynamically */
+  min-height: 140vh;
+  /* Minimum height of 150vh  */
+  height: auto;
+  /* Allow height to adjust dynamically */
 }

@@ -1,0 +1,161 @@
+.roadmapanimatedbutton {
+  cursor: pointer;
+  animation: bounce_513 1s infinite;
+  transition: 0.3s;
+}
+.roadmapanimatedbutton:hover {
+  animation: pause;
+}
+
+@keyframes bounce_513 {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.roadmapanimatedbutton {
+  position: relative;
+  display: flex;
+  gap: 25px;
+}
+
+.roadmapanimatedbutton li {
+  position: relative;
+  list-style: none;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 60px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+.roadmapanimatedbutton li:hover {
+  width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.roadmapanimatedbutton li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.roadmapanimatedbutton li:hover::before {
+  opacity: 1;
+}
+
+.roadmapanimatedbutton li::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  transition: 0.5s;
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0;
+}
+
+.roadmapanimatedbutton li:hover::after {
+  opacity: 0.5;
+}
+
+.roadmapanimatedbutton li .icon {
+  color: #777;
+  transition: 0.5s;
+  transition-delay: 0.25s;
+}
+
+.roadmapanimatedbutton li:hover .icon {
+  transform: scale(0);
+  color: #fff;
+  transition-delay: 0s;
+}
+
+.roadmapanimatedbutton li span {
+  position: absolute;
+}
+
+.roadmapanimatedbutton li .title {
+  color: #fff;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: scale(0);
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+.roadmapanimatedbutton li:hover .title {
+  transform: scale(1);
+  transition-delay: 0.25s;
+}
+
+
+.container-roadmap {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #edf3f9 23.5%,
+        rgba(255, 255, 255, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #fff 24%,
+        rgba(255, 255, 255, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #edf3f9 14%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 85%,
+        #edf3f9 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #edf3f9 24%,
+        #fff 0,
+        #fff 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #fff 0,
+        #fff 76%,
+        #edf3f9 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #edf3f9 24%,
+        #fff 0,
+        #fff 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #fff 0,
+        #fff 76%,
+        #edf3f9 0
+      )
+      0 0,
+    linear-gradient(90deg, #fff 2%, #edf3f9 0, #edf3f9 98%, #fff 0%) 0 0 #edf3f9;
+  background-size: 40px 60px;
+}

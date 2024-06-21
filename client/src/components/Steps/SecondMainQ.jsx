@@ -37,14 +37,14 @@ const SecondMainQ = ({ formData, setFormData }) => {
 
   return (
     <>
-      <div className="h-[100vh] bg-gray-200 flex flex-col justify-center items-center">
+      <div className="container-roadmap h-[100vh] bg-gray-100 flex flex-col justify-center items-center">
         <div class="radio-input">
           <h2 className="text-2xl font-bold mb-6">
             I want to learn something new.
           </h2>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center w-full max-w-lg p-5 bg-white shadow-md rounded"
           >
             <input
               id="value-1"
@@ -52,7 +52,7 @@ const SecondMainQ = ({ formData, setFormData }) => {
               value="dataScience"
               {...register("path", { required: true })}
             />
-            <label className="mb-4" for="value-1">
+            <label className="mb-4" htmlFor="value-1">
               <div class="text">
                 <span class="circle"></span>
                 <span className="ml-2">Data Science</span>
@@ -65,7 +65,7 @@ const SecondMainQ = ({ formData, setFormData }) => {
               value="backEnd"
               {...register("path", { required: true })}
             />
-            <label className="mb-4" for="value-2">
+            <label className="mb-4" htmlFor="value-2">
               <div class="text">
                 <span class="circle"></span>
                 <span className="ml-2">Back-end</span>
@@ -78,7 +78,7 @@ const SecondMainQ = ({ formData, setFormData }) => {
               value="frontEnd"
               {...register("path", { required: true })}
             />
-            <label className="mb-4" for="value-3">
+            <label className="mb-4" htmlFor="value-3">
               <div class="text">
                 <span class="circle"></span>
                 <span className="ml-2">Front-end</span>
@@ -91,7 +91,7 @@ const SecondMainQ = ({ formData, setFormData }) => {
               value="devOps"
               {...register("path", { required: true })}
             />
-            <label className="mb-4" for="value-4">
+            <label className="mb-4" htmlFor="value-4">
               <div class="text">
                 <span class="circle"></span>{" "}
                 <span className="ml-2">DevOps</span>
@@ -105,13 +105,13 @@ const SecondMainQ = ({ formData, setFormData }) => {
               <button
                 type="button"
                 onClick={handlePrevious}
-                className="bg-gray-500 text-white px-4 py-2 rounded"
+                className="bg-bc hover:bg-pc transition-all text-white px-4 py-2 rounded"
               >
                 Previous
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-pc hover:bg-bc transition-all text-white px-4 py-2 rounded"
               >
                 Next
               </button>
