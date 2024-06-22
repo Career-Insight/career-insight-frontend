@@ -28,6 +28,8 @@ import DataScienceStep4 from "./components/Steps/DataSciencePath/DataScienceStep
 import Summary from "./components/Steps/Summary";
 import OurRoadMaps from "./pages/Roadmaps/OurRoadMaps/OurRoadMaps";
 import RoadMapsGraph from "./components/RoadMapsGraph/RoadMapsGraph";
+import YourSavedRoadMaps from "./pages/Roadmaps/YourSavedRoadMaps/YourSavedRoadMaps";
+import RoadMapsGraph2 from "./components/RoadMapsGraph/RoadMapsGraph2";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -90,7 +92,7 @@ function App() {
           ],
         },
         {
-          path: "roadmaps",
+          path: "roadMaps",
           element: (
             // <Protactedroute>
             <Roadmaps />
@@ -151,8 +153,16 @@ function App() {
               element: <OurRoadMaps />,
             },
             {
-              path: ":roadmapsgraph",
+              path: "yourroadmaps",
+              element: <YourSavedRoadMaps />,
+            },
+            {
+              path: "savestaticroadmap/:roadmapsgraph",
               element: <RoadMapsGraph />,
+            },
+            {
+              path: "deletestaticroadmap/:roadmapsgraph2",
+              element: <RoadMapsGraph2 />,
             },
           ],
         },

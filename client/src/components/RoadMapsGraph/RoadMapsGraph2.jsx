@@ -5,7 +5,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import "./roadmapsgraph.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { BallTriangle } from "react-loader-spinner";
@@ -13,12 +13,12 @@ import { jwtDecode } from "jwt-decode";
 import { SquareLibrary } from "lucide-react";
 import toast from "react-hot-toast";
 
-export default function RoadMapsGraph() {
-  const { roadmapsgraph } = useParams();
+export default function RoadMapsGraph2() {
+  const { roadmapsgraph2 } = useParams();
   const [specificRoadmapData, setSpecificRoadmapData] = useState(null);
   const token = Cookies.get("token");
-  const {userId,userName} = jwtDecode(token);
-  
+  const { userId, userName } = jwtDecode(token);
+  const navigate = useNavigate();
   useEffect(() => {
     fetchSpecifcRoadmap();
     return () => {};
@@ -26,7 +26,7 @@ export default function RoadMapsGraph() {
   async function fetchSpecifcRoadmap() {
     try {
       const { data } = await axios.get(
-        `https://career-insight.me/api/v1/static-roadmaps/roadmap/${roadmapsgraph}`,
+        `https://career-insight.me/api/v1/roadmaps/user/${userId}/roadmap/${roadmapsgraph2}`,
         {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
         }
@@ -38,26 +38,24 @@ export default function RoadMapsGraph() {
     }
   }
 
-  const saveOurRoadMap = async (roadmapId) => {
+  const deleteYourRoadMap = async (roadmapId) => {
     try {
-      const { data } = await axios.post(
-        "https://career-insight.me/api/v1/roadmaps/select-and-save",
-        {
-          userId,
-          roadmapId,
-        },
+      const { data } = await axios.delete(
+        `https://career-insight.me/api/v1/roadmaps/user/${userId}/roadmap/${roadmapId}`,
         {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
         }
       );
-      console.log("saved ", data);
-      if (data.message === "Roadmap saved successfully") {
-        toast.success("Roadmap saved successfully");
+      console.log("dlete ", data);
+      if (data.message === "Roadmap deleted successfully") {
+        toast.error("Roadmap deleted successfully");
+        navigate("/roadmaps/yourroadmaps");
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   console.log(specificRoadmapData);
   if (!specificRoadmapData) {
     return (
@@ -100,15 +98,15 @@ export default function RoadMapsGraph() {
             {specificRoadmapData.name}
           </h1>
           <div className="flex mb-3 items-center">
-          <button
+            <button
               onClick={() => {
-                saveOurRoadMap(specificRoadmapData._id);
+                deleteYourRoadMap(specificRoadmapData._id);
               }}
               className="block mr-2 text-lg text-pc hover:bg-pc rounded-lg p-2 hover:text-wc transition-all"
-              >
-              <i className={`fa-regular fa-bookmark`}></i>
+            >
+              <i className="fa-solid fa-trash-can"></i>
             </button>
-            <span className="block">Save to My Paths</span>
+            <span className="block">Delete from My Paths</span>
           </div>
         </div>
       </div>

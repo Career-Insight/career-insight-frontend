@@ -4,32 +4,39 @@ import "./Roadmaps.css";
 const Roadmaps = () => {
   return (
     <div className="relative">
-      <div className="w-40 fixed top-36 left-3">
-        <NavLink to='ourroadmaps' className="roadmapanimatedbutton mb-3">
+      <div className="w-40 fixed top-64 left-3" style={{ zIndex: "100" }}>
+        <NavLink to={-1} className="roadmapanimatedbutton mb-3">
           <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
-            <span className="icon text-pc"><i className="fa-solid fa-bezier-curve"></i></span>
+            <span className="icon text-pc">
+              <i className="fa-solid fa-arrow-left"></i>
+            </span>
+            <span className="title">Back</span>
+          </li>
+        </NavLink>
+        <NavLink to="ourroadmaps" className="roadmapanimatedbutton mb-3">
+          <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
+            <span className="icon text-pc">
+              <i className="fa-solid fa-bezier-curve"></i>
+            </span>
             <span className="title">Our RoadMaps</span>
           </li>
         </NavLink>
-        <ul className="roadmapanimatedbutton mb-3">
+        <NavLink to="yourroadmaps" className="roadmapanimatedbutton mb-3">
           <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
-            <span className="icon text-pc"><i className="fa-solid fa-bezier-curve"></i></span>
-            <span className="title">Our RoadMaps</span>
+            <span className="icon text-pc">
+              <i className="fa-solid fa-user-tie"></i>
+            </span>
+            <span className="title">Your RoadMaps</span>
           </li>
-        </ul>
-        <ul className="roadmapanimatedbutton mb-3">
+        </NavLink>
+        <NavLink to="/roadmaps" className="roadmapanimatedbutton mb-3">
           <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
-            <span className="icon text-pc"><i className="fa-solid fa-bezier-curve"></i></span>
-            <span className="title">Our RoadMaps</span>
+            <span className="icon text-pc">
+              <i className="fa-solid fa-square-plus"></i>
+            </span>
+            <span className="title">Generate RoadMaps</span>
           </li>
-        </ul>
-        <ul className="roadmapanimatedbutton mb-3">
-          <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
-            <span className="icon text-pc"><i className="fa-solid fa-bezier-curve"></i></span>
-            <span className="title">Our RoadMaps</span>
-          </li>
-        </ul>
-        
+        </NavLink>
       </div>
       <Outlet />
     </div>
