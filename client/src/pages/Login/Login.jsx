@@ -37,7 +37,7 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://career-insight.me/api/v1/auth/login",
+        "http://localhost:8000/api/v1/auth/login",
         values
       );
       if (data.message) {
@@ -69,7 +69,14 @@ export default function Login() {
       </Helmet>
       <div className={loginCSS.signupcon}>
         <Owlcarsoulcomp />
-        <div className={`userform ${loginCSS.signform}`}>
+        <div className={`userform ${loginCSS.signform} relative`}>
+          <Link
+            to="/docs"
+            className="absolute top-12 left-[90%] bg-pc hover:bg-bc transition-all p-2 rounded-md"
+          >
+            {" "}
+            <i class="fas fa-arrow-left text-wc text-2xl"></i>{" "}
+          </Link>
           <div className="userform__title">
             <h4>get started now</h4>
             <p>easy log in, easy navigate</p>
@@ -116,7 +123,10 @@ export default function Login() {
               </div>
               <div className="mb-3 text-lg  font-medium">
                 forget{" "}
-                <a href="" className="text-pc">
+                <a
+                  href="mailto: career.insight360@gmail.com"
+                  className="text-pc"
+                >
                   password
                 </a>{" "}
                 ?

@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import verifyCSS from "./verification.module.css";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 export default function Verification() {
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
@@ -81,7 +82,7 @@ export default function Verification() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://career-insight.me/api/v1/auth/verify",
+        "http://localhost:8000/api/v1/auth/verify",
         callObj
       );
       setSuccess(data.message);
@@ -98,9 +99,20 @@ export default function Verification() {
   }
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>career insight | Verification</title>
+      </Helmet>
       <div className={verifyCSS.signupcon}>
         <Owlcarsoulcomp />
-        <div className={`userform ${verifyCSS.verifyform}`}>
+        <div className={`userform ${verifyCSS.verifyform} `}>
+          <Link
+            to="/docs"
+            className="absolute top-12 left-[90%] bg-pc hover:bg-bc transition-all p-2 rounded-md"
+          >
+            {" "}
+            <i class="fas fa-arrow-left text-wc text-2xl"></i>{" "}
+          </Link>
           <div className={`userform__title ${verifyCSS.verifyform__title}`}>
             <h4 className="w-100 text-center">get started now</h4>
             <p className="w-100 text-center">verify your account here</p>

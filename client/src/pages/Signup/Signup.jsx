@@ -72,7 +72,7 @@ export default function Signup() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://career-insight.me/api/v1/auth/register",
+        "http://localhost:8000/api/v1/auth/register",
         values
       );
       setSuccess(data.message);
@@ -95,7 +95,14 @@ export default function Signup() {
       </Helmet>
       <div className={signupCSS.signupcon}>
         <Owlcarsoulcomp />
-        <div className={`userform ${signupCSS.signform}`}>
+        <div className={`userform ${signupCSS.signform} relative`}>
+          <Link
+            to="/docs"
+            className="absolute top-12 left-[90%] bg-pc hover:bg-bc transition-all p-2 rounded-md"
+          >
+            {" "}
+            <i class="fas fa-arrow-left text-wc text-2xl"></i>{" "}
+          </Link>
           <div className="userform__title">
             <h4>get started now</h4>
             <p>create your account here</p>

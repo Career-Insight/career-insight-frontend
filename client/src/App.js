@@ -30,38 +30,47 @@ import OurRoadMaps from "./pages/Roadmaps/OurRoadMaps/OurRoadMaps";
 import RoadMapsGraph from "./components/RoadMapsGraph/RoadMapsGraph";
 import YourSavedRoadMaps from "./pages/Roadmaps/YourSavedRoadMaps/YourSavedRoadMaps";
 import RoadMapsGraph2 from "./components/RoadMapsGraph/RoadMapsGraph2";
+import DataScienceStep3 from "./components/Steps/DataSciencePath/DataScienceStep3";
+import DataScienceStep5 from "./components/Steps/DataSciencePath/DataScienceStep5";
 
 function App() {
-  const [formData, setFormData] = useState({
-    reason: "",
-    path: "",
-    dataScience: {
-      option: "",
-      learnFundamentalsR: "",
-      learnDataWrangling: "",
-      rSkills: {
-        dataManipulation: "",
-        statisticalModeling: "",
-        visualization: "",
-        programming: "",
-      },
-      dataWranglingSkills: {
-        cleaning: "",
-        transformation: "",
-        merging: "",
-        aggregation: "",
-      },
-    },
-    backEnd: {
-      framework: "",
-    },
-    frontEnd: {
-      framework: "",
-    },
-    devOps: {
-      option: "",
-    },
+  const [formData, setFormData] = useState(() => {
+    const savedFormData = localStorage.getItem("formData");
+    return savedFormData
+      ? JSON.parse(savedFormData)
+      : {
+          reason: "",
+          path: "",
+          dataScience: {
+            option: "",
+            learnFundamentalsR: "",
+            learnDataWrangling: "",
+            learnFundamentalsWrangling: "",
+            dataWranglingSkills: {
+              dataManipulation: 0,
+              statisticalModeling: 0,
+              visualization: 0,
+              programming: 0,
+            },
+            rSkills: {
+              dataManipulation: "",
+              statisticalModeling: "",
+              visualization: "",
+              programming: "",
+            },
+          },
+          backEnd: {
+            framework: "",
+          },
+          frontEnd: {
+            framework: "",
+          },
+          devOps: {
+            option: "",
+          },
+        };
   });
+
   const router = createBrowserRouter([
     {
       path: "",
@@ -136,6 +145,15 @@ function App() {
               ),
             },
             {
+              path: "dataScienceStep3",
+              element: (
+                <DataScienceStep3
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
               path: "dataScienceStep4",
               element: (
                 <DataScienceStep4
@@ -145,17 +163,17 @@ function App() {
               ),
             },
             {
-              path: "summary",
-              element: <Summary formData={formData} />,
-            },
-            {
-              path: "ourroadmaps",
-              element: <OurRoadMaps />,
-            },
-            {
-              path: "yourroadmaps",
-              element: <YourSavedRoadMaps />,
-            },
+              path: "dataScienceStep5",
+              element: (
+                <DataScienceStep5
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            }, // New step
+            { path: "summary", element: <Summary formData={formData} /> },
+            { path: "ourroadmaps", element: <OurRoadMaps /> },
+            { path: "yourroadmaps", element: <YourSavedRoadMaps /> },
             {
               path: "savestaticroadmap/:roadmapsgraph",
               element: <RoadMapsGraph />,
@@ -182,10 +200,6 @@ function App() {
             </Protactedroute>
           ),
         },
-        {
-          path: "*",
-          element: <Notfound />,
-        },
       ],
     },
     {
@@ -199,6 +213,10 @@ function App() {
     {
       path: "login",
       element: <Login />,
+    },
+    {
+      path: "*",
+      element: <Notfound />,
     },
   ]);
   const queryVar = new QueryClient();

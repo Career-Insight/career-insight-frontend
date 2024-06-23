@@ -1,12 +1,36 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+import {jwtDecode} from "jwt-decode";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const Summary = ({ formData }) => {
   const { handleSubmit } = useForm();
+  const token = Cookies.get("token");
+  const { userId } = jwtDecode(token);
+
+  async function sendPrompt() {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/ci-chat/generate",
+        {
+          prompt: JSON.stringify(formData), // Convert formData to string
+          userId,
+        },
+        {
+          headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const onSubmit = () => {
     console.log("Form Data:", formData);
     alert("Form submitted successfully!");
+    // sendPrompt();
   };
 
   const handlePrevious = () => {
@@ -56,12 +80,22 @@ const Summary = ({ formData }) => {
                   {formData.dataScience.learnDataWrangling}
                 </p>
               )}
+              {formData.dataScience.learnFundamentalsWrangling && (
+                <p className="mb-2">
+                  <strong className="text-gray-700">
+                    Learn Fundamentals of Data Wrangling:
+                  </strong>{" "}
+                  {formData.dataScience.learnFundamentalsWrangling}
+                </p>
+              )}
 
-              {Object.values(formData.dataScience.rSkills).some(
+              {Object.values(formData.dataScience.rSkills || {}).some(
                 (skill) => skill !== ""
               ) && (
                 <>
-                  <h3 className="font-bold mt-4 text-gray-800 mb-1">R Skills :</h3>
+                  <h3 className="font-bold mt-4 text-gray-800 mb-1">
+                    R Skills:
+                  </h3>
                   {formData.dataScience.rSkills.dataManipulation && (
                     <p className="mb-2">
                       <strong className="text-gray-700">
@@ -93,39 +127,47 @@ const Summary = ({ formData }) => {
                 </>
               )}
 
-              {Object.values(formData.dataScience.dataWranglingSkills).some(
-                (skill) => skill !== ""
-              ) && (
+              {Object.values(
+                formData.dataScience.dataWranglingSkills || {}
+              ).some((skill) => skill !== "") && (
                 <>
                   <h3 className="font-bold mt-4 text-gray-800">
-                    Data Wrangling Skills
+                    Data Wrangling Skills:
                   </h3>
-                  {formData.dataScience.dataWranglingSkills.cleaning && (
-                    <p className="mb-2">
-                      <strong className="text-gray-700">Data Cleaning:</strong>{" "}
-                      {formData.dataScience.dataWranglingSkills.cleaning}
-                    </p>
-                  )}
-                  {formData.dataScience.dataWranglingSkills.transformation && (
+                  {formData.dataScience.dataWranglingSkills
+                    .dataManipulation && (
                     <p className="mb-2">
                       <strong className="text-gray-700">
-                        Data Transformation:
+                        Data Manipulation:
                       </strong>{" "}
-                      {formData.dataScience.dataWranglingSkills.transformation}
+                      {
+                        formData.dataScience.dataWranglingSkills
+                          .dataManipulation
+                      }
                     </p>
                   )}
-                  {formData.dataScience.dataWranglingSkills.merging && (
-                    <p className="mb-2">
-                      <strong className="text-gray-700">Data Merging:</strong>{" "}
-                      {formData.dataScience.dataWranglingSkills.merging}
-                    </p>
-                  )}
-                  {formData.dataScience.dataWranglingSkills.aggregation && (
+                  {formData.dataScience.dataWranglingSkills
+                    .statisticalModeling && (
                     <p className="mb-2">
                       <strong className="text-gray-700">
-                        Data Aggregation:
+                        Statistical Modeling:
                       </strong>{" "}
-                      {formData.dataScience.dataWranglingSkills.aggregation}
+                      {
+                        formData.dataScience.dataWranglingSkills
+                          .statisticalModeling
+                      }
+                    </p>
+                  )}
+                  {formData.dataScience.dataWranglingSkills.visualization && (
+                    <p className="mb-2">
+                      <strong className="text-gray-700">Visualization:</strong>{" "}
+                      {formData.dataScience.dataWranglingSkills.visualization}
+                    </p>
+                  )}
+                  {formData.dataScience.dataWranglingSkills.programming && (
+                    <p className="mb-2">
+                      <strong className="text-gray-700">Programming:</strong>{" "}
+                      {formData.dataScience.dataWranglingSkills.programming}
                     </p>
                   )}
                 </>

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const fetchYourRoadmaps = async (userId) => {
   const { data } = await axios.get(
-    `https://career-insight.me/api/v1/roadmaps/user/${userId}`,
+    `http://localhost:8000/api/v1/roadmaps/user/${userId}`,
     {
       headers: { Authorization: `Bearer ${Cookies.get("token")}` },
     }
@@ -30,7 +30,7 @@ export default function YourSavedRoadMaps() {
   const deleteYourRoadMap = async (roadmapId) => {
     try {
       const { data } = await axios.delete(
-        `https://career-insight.me/api/v1/roadmaps/user/${userId}/roadmap/${roadmapId}`,
+        `http://localhost:8000/api/v1/roadmaps/user/${userId}/roadmap/${roadmapId}`,
         {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
         }

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { removeLastSavedData } from "../../../utils";
+import "../steps.css";
 
-const DataScienceStep4 = ({ formData, setFormData }) => {
+const DataScienceStep5 = ({ formData, setFormData }) => {
   const {
     register,
     handleSubmit,
@@ -19,15 +20,15 @@ const DataScienceStep4 = ({ formData, setFormData }) => {
   const onSubmit = (data) => {
     setFormData({
       ...formData,
-      dataScience: { ...formData.dataScience, rSkills: data },
+      dataScience: { ...formData.dataScience, dataWranglingSkills: data },
     });
-    navigate("../dataScienceStep5");
+    navigate("../summary");
   };
 
   const handlePrevious = () => {
     const updatedFormData = removeLastSavedData(
       formData,
-      "dataScience.rSkills"
+      "dataScience.dataWranglingSkills"
     );
     setFormData(updatedFormData);
     navigate(-1);
@@ -36,7 +37,7 @@ const DataScienceStep4 = ({ formData, setFormData }) => {
   return (
     <div className="container-roadmap flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
       <h2 className="text-2xl font-bold mb-6">
-        Please rate your skills in the following areas of R for data science:
+        Please rate your skills in the following areas of data wrangling:
       </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -118,4 +119,4 @@ const DataScienceStep4 = ({ formData, setFormData }) => {
   );
 };
 
-export default DataScienceStep4;
+export default DataScienceStep5;

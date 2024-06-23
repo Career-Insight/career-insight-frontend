@@ -24,7 +24,7 @@ export default function Footer() {
             </ul>
             <div className={footerCSS.footer_con__email}>
               <p>Email Us As</p>
-              <p>carrerinsight@gmail.com</p>
+              <p>career.insight360@gmail.com</p>
             </div>
             <div className={footerCSS.footer_con__social}>
               <p>you can follow us in :</p>

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const fetchRoadmaps = async () => {
   const { data } = await axios.get(
-    "https://career-insight.me/api/v1/static-roadmaps/all-roadmaps",
+    "http://localhost:8000/api/v1/static-roadmaps/all-roadmaps",
     {
       headers: { Authorization: `Bearer ${Cookies.get("token")}` },
     }
@@ -25,7 +25,7 @@ export default function OurRoadMaps() {
   const saveOurRoadMap = async (roadmapId) => {
     try {
       const { data } = await axios.post(
-        "https://career-insight.me/api/v1/roadmaps/select-and-save",
+        "http://localhost:8000/api/v1/roadmaps/select-and-save",
         {
           userId,
           roadmapId,

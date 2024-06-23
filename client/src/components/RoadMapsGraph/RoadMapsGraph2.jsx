@@ -10,7 +10,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { BallTriangle } from "react-loader-spinner";
 import { jwtDecode } from "jwt-decode";
-import { SquareLibrary } from "lucide-react";
+import { SquareLibrary, TrendingUp } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function RoadMapsGraph2() {
@@ -26,7 +26,7 @@ export default function RoadMapsGraph2() {
   async function fetchSpecifcRoadmap() {
     try {
       const { data } = await axios.get(
-        `https://career-insight.me/api/v1/roadmaps/user/${userId}/roadmap/${roadmapsgraph2}`,
+        `http://localhost:8000/api/v1/roadmaps/user/${userId}/roadmap/${roadmapsgraph2}`,
         {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
         }
@@ -41,7 +41,7 @@ export default function RoadMapsGraph2() {
   const deleteYourRoadMap = async (roadmapId) => {
     try {
       const { data } = await axios.delete(
-        `https://career-insight.me/api/v1/roadmaps/user/${userId}/roadmap/${roadmapId}`,
+        `http://localhost:8000/api/v1/roadmaps/user/${userId}/roadmap/${roadmapId}`,
         {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
         }
@@ -74,8 +74,11 @@ export default function RoadMapsGraph2() {
     );
   }
   const stages = Object.keys(specificRoadmapData?.RoadMap?.learning_plan);
-  const MarketTrends = specificRoadmapData.RoadMap.market_trends;
-
+  const {
+    _id,
+    name,
+    RoadMap: { learning_plan, market_trends } = {},
+  } = specificRoadmapData;
   return (
     <div className="container-roadmap flex flex-col items-center justify-center min-h-screen bg-gray-100 relative">
       <div className="w-100 px-4 sticky top-0 left-0 z-50 bg-wc">
@@ -210,47 +213,115 @@ export default function RoadMapsGraph2() {
             })}
           </VerticalTimeline>
         </div>
-        <div className="col-md-4 bg-black text-wc relative">
-          {/* <div className="sticky top-0 left-0 bg-red-500">
-            <h2 className="text-2xl font-bold">Market Trends</h2>
-            <div className="">
-              <h3 className="text-xl font-semibold">Average Salary</h3>
-              <p>Junior: {MarketTrends.average_salary.amount.junior}</p>
-              <p>Mid: {average_salary.amount.mid}</p>
-              <p>Senior: {average_salary.amount.senior}</p>
-              <p>Source: {average_salary.source}</p>
+        <div className="col-md-4 flex flex-col justify-between items-center my-5 h-[280vh] md:h-[200vh]">
+          <div className="p-4">
+            <div className="flex items-center mb-4">
+              <TrendingUp width={30} height={30} color="#323efb" />
+              <h2 className="text-3xl font-bold text-pc ml-2">Market Trends</h2>
             </div>
-            <div className="">
-              <h3 className="text-xl font-semibold">Job Outlook</h3>
-              <p>Growth: {job_outlook.react_developer_2023.growth}</p>
-              <p>
-                Rapid Growth Positions:{" "}
-                {job_outlook.react_developer_2023.rapid_growth_positions}
-              </p>
-            </div>
-            <div className="">
-              <h3 className="text-xl font-semibold">
-                Popular Sites Using React
-              </h3>
-              <ul>
-                {popular_sites_using_react.map((site, index) => (
-                  <li key={index}>{site}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="">
-              <h3 className="text-xl font-semibold">
-                React Technologies Usage
-              </h3>
-              <p>Percentage: {react_technologies_usage.percentage}</p>
-              <p>Source: {react_technologies_usage.source}</p>
-            </div>
-            <div className="">
-              <h3 className="text-xl font-semibold">Year Over Year Demand</h3>
-              <p>Increase: {year_over_year_demand.increase}</p>
-              <p>Source: {year_over_year_demand.source}</p>
-            </div>
-          </div> */}
+
+            {market_trends?.average_salary && (
+              <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                  <i className="fas fa-dollar-sign ml-2"></i> Average Salary :
+                </h3>
+                <p>
+                  <span className="text-pc font-medium">Junior:</span>{" "}
+                  {market_trends.average_salary.amount?.junior || "N/A"}
+                </p>
+                <p>
+                  <span className="text-pc font-medium">Mid:</span>{" "}
+                  {market_trends.average_salary.amount?.mid || "N/A"}
+                </p>
+                <p>
+                  <span className="text-pc font-medium">Senior:</span>{" "}
+                  {market_trends.average_salary.amount?.senior || "N/A"}
+                </p>
+                <p>
+                  <span className="text-pc font-medium">Source:</span>{" "}
+                  {market_trends.average_salary.source || "N/A"}
+                </p>
+              </div>
+            )}
+
+            {market_trends.job_outlook.developer_2023 && (
+              <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                  <i className="fas fa-laptop-house ml-2"></i> Job Outlook :
+                </h3>
+                <p>
+                  <span className="text-pc font-medium">Growth:</span>{" "}
+                  {market_trends.job_outlook.developer_2023.growth || "N/A"}
+                </p>
+                <p>
+                  <span className="text-pc font-medium">
+                    Rapid Growth Positions:
+                  </span>
+                  {market_trends.job_outlook.developer_2023
+                    .rapid_growth_positions || "N/A"}
+                </p>
+              </div>
+            )}
+            {market_trends?.popular_sites && (
+              <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                  <i className="fas fa-business-time ml-2"></i> Popular Sites
+                  Using React :
+                </h3>
+                <ul>
+                  {market_trends.popular_sites.map((site, index) => (
+                    <li key={index}>{site}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {market_trends?.popular_companies && (
+              <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                  <i className="fas fa-business-time ml-2"></i> Popular
+                  Companies Using React :
+                </h3>
+                <ul>
+                  {market_trends.popular_companies.map((company, index) => (
+                    <li key={index}>{company}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {market_trends?.technologies_usage &&
+              market_trends.technologies_usage.percentage && (
+                <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                  <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                    <i className="fas fa-microchip ml-2"></i> React Technologies
+                    Usage :
+                  </h3>
+                  <p>
+                    <span className="text-pc font-medium">Percentage:</span>{" "}
+                    {market_trends.technologies_usage.percentage || "N/A"}
+                  </p>
+                  <p>
+                    <span className="text-pc font-medium">Source:</span>{" "}
+                    {market_trends.technologies_usage.source || "N/A"}
+                  </p>
+                </div>
+              )}
+            {market_trends?.year_over_year_demand && (
+              <div className="mb-4 p-4 bg-white border-1 rounded-md shadow-md border-pc">
+                <h3 className="text-xl mb-2 font-semibold text-gray-400">
+                  <i className="fas fa-calendar-alt ml-2"></i> Year Over Year
+                  Demand :
+                </h3>
+                <p>
+                  <span className="text-pc font-medium">Increase:</span>{" "}
+                  {market_trends.year_over_year_demand.increase || "N/A"}
+                </p>
+                <p>
+                  <span className="text-pc font-medium">Source:</span>{" "}
+                  {market_trends.year_over_year_demand.source || "N/A"}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
