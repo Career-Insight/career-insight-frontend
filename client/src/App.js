@@ -24,14 +24,21 @@ import { Toaster } from "react-hot-toast";
 import SecondMainQ from "./components/Steps/SecondMainQ";
 import DataScienceStep1 from "./components/Steps/DataSciencePath/DataScienceStep1";
 import DataScienceStep2 from "./components/Steps/DataSciencePath/DataScienceStep2";
+import DataScienceStep3 from "./components/Steps/DataSciencePath/DataScienceStep3";
 import DataScienceStep4 from "./components/Steps/DataSciencePath/DataScienceStep4";
+import DataScienceStep5 from "./components/Steps/DataSciencePath/DataScienceStep5";
 import Summary from "./components/Steps/Summary";
 import OurRoadMaps from "./pages/Roadmaps/OurRoadMaps/OurRoadMaps";
 import RoadMapsGraph from "./components/RoadMapsGraph/RoadMapsGraph";
 import YourSavedRoadMaps from "./pages/Roadmaps/YourSavedRoadMaps/YourSavedRoadMaps";
 import RoadMapsGraph2 from "./components/RoadMapsGraph/RoadMapsGraph2";
-import DataScienceStep3 from "./components/Steps/DataSciencePath/DataScienceStep3";
-import DataScienceStep5 from "./components/Steps/DataSciencePath/DataScienceStep5";
+import BackEndStep1 from "./components/Steps/BackEndPath/BackEndStep1";
+import BackEndStep2 from "./components/Steps/BackEndPath/BackEndStep2";
+import BackEndSkillsSpringBoot from "./components/Steps/BackEndPath/BackEndSkillsSpringBoot";
+import BackEndSkillsFlask from "./components/Steps/BackEndPath/BackEndSkillsFlask";
+import BackEndSkillsDjango from "./components/Steps/BackEndPath/BackEndSkillsDjango";
+import BackEndSkillsNodeJS from "./components/Steps/BackEndPath/BackEndSkillsNodeJS";
+import BackEndSkillsPHP from "./components/Steps/BackEndPath/BackEndSkillsPHP";
 
 function App() {
   const [formData, setFormData] = useState(() => {
@@ -61,6 +68,13 @@ function App() {
           },
           backEnd: {
             framework: "",
+            needRefresher: "",
+            skills: {
+              dataManipulation: 0,
+              statisticalModeling: 0,
+              visualization: 0,
+              programming: 0,
+            },
           },
           frontEnd: {
             framework: "",
@@ -170,7 +184,64 @@ function App() {
                   setFormData={setFormData}
                 />
               ),
-            }, // New step
+            },
+            {
+              path: "backEndStep1",
+              element: (
+                <BackEndStep1 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "backEndStep2",
+              element: (
+                <BackEndStep2 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "backEndSkillsSpringBoot",
+              element: (
+                <BackEndSkillsSpringBoot
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "backEndSkillsFlask",
+              element: (
+                <BackEndSkillsFlask
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "backEndSkillsDjango",
+              element: (
+                <BackEndSkillsDjango
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "backEndSkillsNodeJS",
+              element: (
+                <BackEndSkillsNodeJS
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "backEndSkillsPHP",
+              element: (
+                <BackEndSkillsPHP
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
             { path: "summary", element: <Summary formData={formData} /> },
             { path: "ourroadmaps", element: <OurRoadMaps /> },
             { path: "yourroadmaps", element: <YourSavedRoadMaps /> },
@@ -219,6 +290,7 @@ function App() {
       element: <Notfound />,
     },
   ]);
+
   const queryVar = new QueryClient();
   return (
     <>
