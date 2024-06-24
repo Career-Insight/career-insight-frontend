@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>career insight | docs</title>
+        <title>career insight | Home</title>
       </Helmet>
       <main className={homeCSS.hero}>
         <Canvadots />

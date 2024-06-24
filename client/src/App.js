@@ -39,6 +39,15 @@ import BackEndSkillsFlask from "./components/Steps/BackEndPath/BackEndSkillsFlas
 import BackEndSkillsDjango from "./components/Steps/BackEndPath/BackEndSkillsDjango";
 import BackEndSkillsNodeJS from "./components/Steps/BackEndPath/BackEndSkillsNodeJS";
 import BackEndSkillsPHP from "./components/Steps/BackEndPath/BackEndSkillsPHP";
+import FrontEndStep1 from "./components/Steps/FrontEndPath/FrontEndStep1";
+import FrontEndStep2 from "./components/Steps/FrontEndPath/FrontEndStep2";
+import FrontEndSkillsReact from "./components/Steps/FrontEndPath/FrontEndSkillsReact";
+import FrontEndSkillsAngular from "./components/Steps/FrontEndPath/FrontEndSkillsAngular";
+import DevOpsStep1 from "./components/Steps/DevOpsPath/DevOpsStep1";
+import DevOpsStep2 from "./components/Steps/DevOpsPath/DevOpsStep2";
+import DevOpsSkillsIaC from "./components/Steps/DevOpsPath/DevOpsSkillsIaC";
+import DevOpsStep3 from "./components/Steps/DevOpsPath/DevOpsStep3";
+import DevOpsSkillsCloudProviders from "./components/Steps/DevOpsPath/DevOpsSkillsCloudProviders";
 
 function App() {
   const [formData, setFormData] = useState(() => {
@@ -78,9 +87,31 @@ function App() {
           },
           frontEnd: {
             framework: "",
+            needRefresher: "",
+            skills: {
+              html: 0,
+              css: 0,
+              js: 0,
+              frameworkBasics: 0,
+              stateManagement: 0,
+              additionalSkill: 0,
+            },
           },
           devOps: {
             option: "",
+            needRefresher: "",
+            cloudProviderSkills: {
+              paython: 0,
+              docker: 0,
+              systemadmin: 0,
+              aws: 0,
+            },
+            iaCSkills: {
+              paython: 0,
+              systemAdmin: 0,
+              bash: 0,
+              docker: 0,
+            },
           },
         };
   });
@@ -95,7 +126,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "docs",
+          path: "home",
           element: <Home />,
         },
         {
@@ -122,12 +153,8 @@ function App() {
             // </Protactedroute>
           ),
           children: [
-            {
-              path: "",
-              element: (
-                <FirstMainQ formData={formData} setFormData={setFormData} />
-              ),
-            },
+            { path: "", element: <OurRoadMaps /> },
+            { path: "ourroadmaps", element: <OurRoadMaps /> },
             {
               path: "first-main-q",
               element: (
@@ -242,8 +269,74 @@ function App() {
                 />
               ),
             },
+            {
+              path: "frontEndStep1",
+              element: (
+                <FrontEndStep1 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "frontEndStep2",
+              element: (
+                <FrontEndStep2 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "frontEndSkillsReact",
+              element: (
+                <FrontEndSkillsReact
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "frontEndSkillsAngular",
+              element: (
+                <FrontEndSkillsAngular
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "devOpsStep1",
+              element: (
+                <DevOpsStep1 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "devOpsStep2",
+              element: (
+                <DevOpsStep2 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "devOpsSkillsIaC",
+              element: (
+                <DevOpsSkillsIaC
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
+            {
+              path: "devOpsStep3",
+              element: (
+                <DevOpsStep3 formData={formData} setFormData={setFormData} />
+              ),
+            },
+            {
+              path: "devOpsSkillsCloudProviders",
+              element: (
+                <DevOpsSkillsCloudProviders
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              ),
+            },
             { path: "summary", element: <Summary formData={formData} /> },
-            { path: "ourroadmaps", element: <OurRoadMaps /> },
+
             { path: "yourroadmaps", element: <YourSavedRoadMaps /> },
             {
               path: "savestaticroadmap/:roadmapsgraph",

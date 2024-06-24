@@ -11,7 +11,7 @@ export default function Rechart2() {
   async function pieApiCalling() {
     try {
       const { data } = await axios.get(
-        "https://career-insight.me/api/v1/dashboard/general/frontend-technologies/5",
+        "http://localhost:8000/api/v1/dashboard/general/frontend-technologies/5",
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setPieData(data);

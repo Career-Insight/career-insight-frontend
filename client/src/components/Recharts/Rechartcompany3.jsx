@@ -29,7 +29,7 @@ const getCompanyNameSelect = async (companyname) => {
   console.log("companyname", companyname);
   try {
     const { data } = await axios.get(
-      `https://career-insight.me/api/v1/review/get-rating/?company_name=${companyname}`,
+      `http://localhost:8000/api/v1/review/get-rating/?company_name=${companyname}`,
       { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
     );
     console.log("data", data);

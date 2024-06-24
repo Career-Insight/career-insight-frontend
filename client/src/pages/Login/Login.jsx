@@ -44,7 +44,7 @@ export default function Login() {
         setSuccess(data.message);
       }
       setTimeout(() => {
-        navigate("/docs");
+        navigate("/home");
       }, 2000);
       setToken(data.access_token);
       Cookies.set("token", data.access_token, {

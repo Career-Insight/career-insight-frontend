@@ -69,7 +69,7 @@ export default function Dashboard() {
   async function dataBarBackendApiCalling() {
     try {
       const { data } = await axios.get(
-        "https://career-insight.me/api/v1/dashboard/general/backend-technologies/5",
+        "http://localhost:8000/api/v1/dashboard/general/backend-technologies/5",
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       );
       setDataBarBackend(data);

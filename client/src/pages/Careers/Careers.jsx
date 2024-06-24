@@ -14,14 +14,14 @@ export default function Careers() {
 
   const getCompaniesNames = async () => {
     const { data } = await axios.get(
-      "https://career-insight.me/api/v1/company/get-companies-data",
+      "http://localhost:8000/api/v1/company/get-companies-data",
       { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
     );
     setCompanyNamesData(data);
     return data;
   };
 
-  const { data, isLoading } = useQuery("companies", getCompaniesNames);
+  const { data, isLoading, error } = useQuery("companies", getCompaniesNames);
   if (isLoading || !data) {
     return (
       <div className="w-100 h-[100vh] flex justify-center items-center">
@@ -38,7 +38,8 @@ export default function Careers() {
       </div>
     );
   }
-
+  console.log(error);
+  console.log(data);
   return (
     <>
       <Helmet>

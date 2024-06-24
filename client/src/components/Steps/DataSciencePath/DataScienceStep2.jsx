@@ -39,14 +39,13 @@ const DataScienceStep2 = ({ formData, setFormData }) => {
   return (
     <>
       <div className="container-roadmap h-[100vh] bg-gray-100 flex flex-col justify-center items-center">
-        <div class="radio-input">
-          
+        <div className="radio-input">
           <h2 className="text-2xl font-bold mb-6">
             Do you want to learn the fundamentals of R for data science?
           </h2>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center w-full max-w-lg p-5 bg-white shadow-md rounded"
+            className="flex flex-col items-center w-[50%] mx-auto p-4 bg-white shadow-md rounded"
           >
             <input
               id="value-1"
@@ -55,8 +54,8 @@ const DataScienceStep2 = ({ formData, setFormData }) => {
               {...register("learnFundamentalsR", { required: true })}
             />
             <label className="mb-4" htmlFor="value-1">
-              <div class="text">
-                <span class="circle"></span>
+              <div className="text">
+                <span className="circle"></span>
                 <span className="ml-2">Yes</span>
               </div>
             </label>
@@ -67,14 +66,15 @@ const DataScienceStep2 = ({ formData, setFormData }) => {
               {...register("learnFundamentalsR", { required: true })}
             />
             <label className="mb-4" htmlFor="value-2">
-              <div class="text">
-                <span class="circle"></span>
+              <div className="text">
+                <span className="circle"></span>
                 <span className="ml-2">No</span>
               </div>
             </label>
 
             <div className="d-none">
-              {errors.learnFundamentalsR && toast.error("This field is required")}
+              {errors.learnFundamentalsR &&
+                toast.error("This field is required")}
             </div>
             <div className="flex space-x-4">
               <button

@@ -25,7 +25,7 @@ ChartJS.register(
 
 const fetchCompaniesReviews = async () => {
   const { data } = await axios.get(
-    "https://career-insight.me/api/v1/review/best-companies/",
+    "http://localhost:8000/api/v1/review/best-companies/",
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;

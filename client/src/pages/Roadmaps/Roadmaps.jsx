@@ -35,7 +35,7 @@ const Roadmaps = () => {
               <span className="title">Your RoadMaps</span>
             </li>
           </NavLink>
-          <NavLink to="/roadmaps" className="roadmapanimatedbutton mb-3">
+          <NavLink to="first-main-q" className="roadmapanimatedbutton mb-3">
             <li style={{ "--i": "#323efb", "--j": "#edf3f9" }}>
               <span className="icon text-pc">
                 <i className="fa-solid fa-square-plus"></i>

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { BallTriangle } from "react-loader-spinner";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import roadmapgif from "../../../images/roadmap.gif";
 
 const fetchYourRoadmaps = async (userId) => {
   const { data } = await axios.get(
@@ -104,6 +105,9 @@ export default function YourSavedRoadMaps() {
               return (
                 <div key={idx} className="col-md-4">
                   <div className="flex flex-col items-center justify-center bg-white shadow-md rounded-lg p-4">
+                    <div className="h-96 w-100">
+                      <img className="w-100" src={roadmapgif} alt="" />
+                    </div>
                     <div className="flex items-center justify-between w-full">
                       <h2 className="text-lg font-bold text-pc">
                         {roadmap.name}

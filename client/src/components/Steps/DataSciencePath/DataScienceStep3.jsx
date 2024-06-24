@@ -45,7 +45,7 @@ const DataScienceStep3 = ({ formData, setFormData }) => {
           </h2>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center w-full max-w-lg p-5 bg-white shadow-md rounded"
+            className="flex flex-col items-center w-[50%] mx-auto p-4 bg-white shadow-md rounded"
           >
             <input
               id="value-1"

@@ -19,7 +19,7 @@ import companyDetaildCSS from "./CompanyDetails.module.css";
 // Fetch function using axios
 const fetchCompanyDetails = async (companydetails) => {
   const { data } = await axios.get(
-    `https://career-insight.me/api/v1/company/get-company?company_name=${companydetails}`,
+    `http://localhost:8000/api/v1/company/get-company?company_name=${companydetails}`,
     { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
   );
   return data;

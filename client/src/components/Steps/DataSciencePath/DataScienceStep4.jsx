@@ -21,7 +21,7 @@ const DataScienceStep4 = ({ formData, setFormData }) => {
       ...formData,
       dataScience: { ...formData.dataScience, rSkills: data },
     });
-    navigate("../dataScienceStep5");
+    navigate("../summary");
   };
 
   const handlePrevious = () => {
@@ -34,13 +34,13 @@ const DataScienceStep4 = ({ formData, setFormData }) => {
   };
 
   return (
-    <div className="container-roadmap flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
+    <div className="container-roadmap flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 w-100">
       <h2 className="text-2xl font-bold mb-6">
         Please rate your skills in the following areas of R for data science:
       </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-lg p-5 bg-white shadow-md rounded"
+        className=" max-w-lg w-[50%] p-5 bg-white shadow-md rounded"
       >
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">

@@ -50,7 +50,7 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:flex  items-center">
                   <div className="flex space-x-4">
                     <NavLink
-                      to="/docs"
+                      to="/home"
                       className={(navData) =>
                         navData.isActive ||
                         typeof navData.isActive === "undefined"
@@ -59,7 +59,7 @@ export default function Navbar() {
                       }
                       aria-current="page"
                     >
-                      Docs{" "}
+                      Home{" "}
                     </NavLink>
                     {token ? (
                       <>

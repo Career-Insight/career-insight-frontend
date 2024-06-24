@@ -70,12 +70,12 @@ const BackEndStep2 = ({ formData, setFormData }) => {
   };
 
   return (
-    <div className="container-roadmap h-[100vh] bg-gray-100 flex flex-col justify-center items-center">
-      <h2 className="text-2xl font-bold mb-6">{getFrameworkMessage()}</h2>
+    <div className="container-roadmap h-[200vh] md:h-[100vh] bg-gray-100 flex flex-col justify-center items-center">
+      <h2 className="text-2xl w-[50%] mx-auto font-bold mb-6">{getFrameworkMessage()}</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center w-full max-w-lg p-5 bg-white shadow-md rounded"
-      >
+        className="flex flex-col items-center w-[50%] mx-auto p-4 bg-white shadow-md rounded"
+        >
         <div className="radio-input">
           <input
             id="yes"
