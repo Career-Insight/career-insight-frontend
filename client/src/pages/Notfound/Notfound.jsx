@@ -53,7 +53,7 @@ export default function Notfound() {
           </div>
 
           <Link
-            to="/docs"
+            to="/home"
             className="error-page__button"
             aria-label="back to home"
             title="back to home"
